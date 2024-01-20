@@ -21,7 +21,7 @@ const GenerateTicket = async (req, res) => {
         const availableTicket = await connection.get('SELECT * FROM tambola_ticket WHERE ticket_data = ?', [JSON.stringify(myTicket)]);
 
         if (!availableTicket) {
-          await connection.run(insertQuery, [JSON.stringify(myTicket)]) 
+          await connection.run(insertQuery, [JSON.stringify(myTicket)])
             .then((res) => {
               insertedIds.push(res.lastID)
               console.log("new ticket inserted with id " + res.lastID);
@@ -114,16 +114,19 @@ const GetTicketById = async (req, res) => {
     `
     );
 
-    if(ticketDetails){
-          res.status(200).json({
-      status : "success",
-      message: `Ticket details fetched successfully.`,
-      data: ticketDetails
-    })
+    if (ticketDetails) {
+      res.status(200).json({
+        status: "success",
+        message: `Ticket details fetched successfully.`,
+        data: {
+          id: ticketDetails.id,
+          ticketData: JSON.parse(ticketDetails.ticket_data)
+        }
+      })
     }
-    else{
+    else {
       res.status(400).json({
-        status : "failed",
+        status: "failed",
         message: `Invalid ticket id ${ticketId}`,
         data: ticketDetails
       })
