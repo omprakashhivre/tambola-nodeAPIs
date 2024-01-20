@@ -1,0 +1,22 @@
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+
+# Log files
+*.log
+
+# Debugging files
+npm-debug.log*
+
+# Ignore .vscode directory
+.vscode/
+
+# Ignore the build directory
+/build/
+
+# Ignore the coverage directory
+/coverage/
+
+package-lock.json
